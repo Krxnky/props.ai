@@ -1,16 +1,23 @@
-import datetime
-from nba_api.stats.endpoints import playergamelog
+from datetime import date
+import json
+from nba_api.stats.endpoints import playergamelog, ScoreboardV2, CommonTeamRoster
+from nba_api.stats.static.players import get_active_players
+from nba_api.stats.static.teams import get_teams, find_team_name_by_id
 
-# Find Jokic's player ID (can be found online or through nba_api's static data endpoints)
-player_id = 203999  # Example ID for Nikola Jokic
+def get_tonights_players():
+    players = []
+    scoreboard = ScoreboardV2(game_date=date.today())
+    data = scoreboard.get_normalized_dict()
 
-# Get the most recent season (assuming today's date is within the season)
-current_season = datetime.date.today().year - 1  # Adjust for the previous year if needed
+    for game in data["GameHeader"]:
+        print(find_team_name_by_id(game["HOME_TEAM_ID"])["full_name"] + " : " + find_team_name_by_id(game["VISITOR_TEAM_ID"])["full_name"])
+        homeRoster = CommonTeamRoster(team_id=game["HOME_TEAM_ID"]).get_normalized_dict()
+        for player in homeRoster["CommonTeamRoster"]:
+            players.append(player)
 
-# Call the endpoint specifying player ID and season
-jokic_gamelog = playergamelog.PlayerGameLog(player_id=player_id, season=current_season)
+        awayRoster = CommonTeamRoster(team_id=game["VISITOR_TEAM_ID"]).get_normalized_dict()
+        for player in awayRoster["CommonTeamRoster"]:
+            players.append(player)
 
-# Get the data (can be returned as JSON, dictionary, or pandas DataFrame)
-gamelog_data = jokic_gamelog.get_data_frames()[0]  # Returns a  pandas DataFrame
+    return players
 
-print(gamelog_data)
