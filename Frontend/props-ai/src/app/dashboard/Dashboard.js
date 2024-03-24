@@ -13,15 +13,20 @@ export default function Dashboard() {
     console.log(test_players)
     return (
         
-        <div className="flex bg-zinc-900 pt-3">
-            {/* {console.log(test_players[0])}
-            <PropItem player={test_players[0]} />
+        <div className="flex flex-col p-5 bg-zinc-900 pt-3">
+            {/* <PropItem player={test_players[0]} /> */}
             
             {
                 test_players.map((player) => {
-                    <PropItem player={player} />
+
+                    {console.log("TRYING TO SEND THIS OBJECT to PROPITEM")}
+                    {console.log(player)}
+
+                    return <PropItem player={player} />
+
                     })
-            } */}
+                    
+            }
         </div>
     )
 }
