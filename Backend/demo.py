@@ -10,7 +10,7 @@ def get_tonights_players():
     data = scoreboard.get_normalized_dict()
 
     for game in data["GameHeader"]:
-        print(find_team_name_by_id(game["HOME_TEAM_ID"])["full_name"] + " : " + find_team_name_by_id(game["VISITOR_TEAM_ID"])["full_name"])
+        # print(find_team_name_by_id(game["HOME_TEAM_ID"])["full_name"] + " : " + find_team_name_by_id(game["VISITOR_TEAM_ID"])["full_name"])
         homeRoster = CommonTeamRoster(team_id=game["HOME_TEAM_ID"]).get_normalized_dict()
         for player in homeRoster["CommonTeamRoster"]:
             players.append(player)
@@ -20,4 +20,3 @@ def get_tonights_players():
             players.append(player)
 
     return players
-
