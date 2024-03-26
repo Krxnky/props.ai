@@ -26,9 +26,9 @@ def get_tonights_players():
 
     return players
 
-player_name = "Anthony Davis"
+player_name = "Jaren Jackson Jr"
 player_id = players.find_players_by_full_name(player_name)[0]["id"]
-point_threshold = 24.5
+point_threshold = 21.5
 
 game_log = PlayerGameLog(player_id=player_id, season="2023-24").get_data_frames()[0]
 game_log2 = PlayerGameLog(player_id=player_id, season="2022-23").get_data_frames()[0]
@@ -78,7 +78,7 @@ sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
 plt.xlabel('Predicted')
 plt.ylabel('True')
 plt.title(f'Confusion Matrix - Jimmy Butler Simulated with {point_threshold} points')
-plt.show()
+#plt.show()
 
 if predictions[0] == 1:
     print(f"\nThe model predicts that {player_name} will score over {point_threshold} points in today's game.")
