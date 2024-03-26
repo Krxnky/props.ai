@@ -12,8 +12,8 @@ export default function PropItem(player){
                 height={175} 
                 className="py-7"    
             />
-            <div className="flex flex-col pl-10">
-                <p className="text-xl">
+            <div className="flex flex-col pl-10 ">
+                <p className="text-3xl text-white font-light" >
                     {player.player.name}
                 </p>
                 <p className="text-left text-sm font-thin">
