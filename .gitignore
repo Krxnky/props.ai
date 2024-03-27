@@ -1,1 +1,5 @@
-Backend/.venv/Lib/
+Backend/.venv
+Backend/.venv/Lib
+Backend/.venv/Scripts
+Backend/__pycache__
+node_modules
