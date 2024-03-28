@@ -47,10 +47,27 @@ def get_players():
 
     return players
 
+def statType(stat):
+        # find the stat retrieved
+            if stat == "Pts+Rebs+Asts":
+                return "pra"
+            elif stat == "Pts+Asts":
+                return "pa"
+            elif stat == "Pts+Rebs":
+                return "pr"
+            elif stat == "Rebs+Asts":
+                return "ra"
+            elif stat == "3-PT Made":
+                return "threes"
+            elif stat == "Blocked Shots":
+                return "blocks"
+            else:
+                return stat
+
 @app.route('/get-props')
 def get_props():
     # TODO: FETCH PROPS FROM PRIZEPICKS
-    with open('./projections.json', 'r') as file:
+    with open('./data/projections.json', 'r') as file:
         json_data = json.load(file)
         seive = {"points", "rebounds", "assists", "threes", "blocks", "steals", "pra", "pr", "pa", "ra"}
         player_names = {elem["id"]: elem["attributes"]["name"]
@@ -64,23 +81,10 @@ def get_props():
 
                 flash_sale = projection["attributes"].get("flash_sale_line_score")
                 line_score = projection["attributes"]["line_score"]
-                stat_type = projection["attributes"]["stat_type"]
+                stat_type = statType(projection["attributes"]["stat_type"]).lower()
                 start_time = projection["attributes"]["start_time"]
 
-                if stat_type == "Pts+Rebs+Asts":
-                    stat_type = "pra"
-                if stat_type == "Pts+Asts":
-                    stat_type = "pa"
-                if stat_type == "Pts+Rebs":
-                    stat_type = "pr"
-                if stat_type == "Rebs+Asts":
-                    stat_type = "ra"
-                if stat_type == "3-PT Made":
-                    stat_type = "threes"
-                if stat_type == "Blocked Shots":
-                    stat_type = "blocks"
-
-                if stat_type in seive:
+                if stat_type in seive and projection["attributes"].get("adjusted_odds") is not True:
                     player_projections.append({
                         'player_name': player_name,
                         'player_id': player_id,
@@ -88,11 +92,28 @@ def get_props():
                         'line_score': line_score,
                         'start_time': start_time
                     })
+
+                if stat_type in seive and flash_sale is not None:
+                    player_projections.append({
+                        'player_name': player_name,
+                        'player_id': player_id,
+                        'stat_type': stat_type,
+                        'line_score': flash_sale,
+                        'start_time': start_time
+                    })
         data = []
-        for player in player_projections:
-            model = PropsModelV1(player['player_name'], player['stat_type'], player['line_score'])
-            prediction = model.get_prediction()
-            data.append(player.update(prediction))
+        for idx, player in enumerate(player_projections):
+
+            if(player['stat_type'] == 'points'):
+                print(f"PREDICTING {player['player_name']} AT {player['line_score']} {player['stat_type']} ({idx}/{len(player_projections)})")
+                try:
+                    model = PropsModelV1(player['player_name'], player['stat_type'], player['line_score'])
+                    prediction = model.get_prediction()
+                    player.update(prediction)
+                    print(player)
+                    data.append(player)
+                except:
+                    print(f"ERROR OCCURED WHILE PREDICTING {player['player_name']} AT {player['line_score']} {player['stat_type']}")
                 
 
         return data

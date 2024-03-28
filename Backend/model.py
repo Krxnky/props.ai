@@ -14,7 +14,6 @@ class PropsModelV1():
         self.player_name = player_name
         self.stat_type = stat_type
         self.line_score = line_score
-        print(self.player_name, self.stat_type, self.line_score)
 
     def get_prediction(self):
         player_id = players.find_players_by_full_name(self.player_name)[0]["id"]
@@ -22,7 +21,6 @@ class PropsModelV1():
 
         game_log = PlayerGameLog(player_id=player_id, season="2023-24").get_data_frames()[0]
         game_log2 = PlayerGameLog(player_id=player_id, season="2022-23").get_data_frames()[0]
-        print('GOT GAME LOG')
         column = game_log[['Game_ID', 'GAME_DATE', 'MATCHUP', 'PTS', 'AST', 'STL', 'REB', 'TOV','FGA','FGM', 'FG3M', 'FG3A', 'BLK','FTA','FTM','PLUS_MINUS']]
         column2 = game_log2[['Game_ID', 'GAME_DATE', 'MATCHUP', 'PTS', 'AST', 'STL', 'REB', 'TOV','FGA','FGM', 'FG3M', 'FG3A', 'BLK','FTA','FTM','PLUS_MINUS']]
         frames = [pd.DataFrame(column), pd.DataFrame(column2)]
