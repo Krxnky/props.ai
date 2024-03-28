@@ -64,56 +64,72 @@ def statType(stat):
             else:
                 return stat
 
-@app.route('/get-props')
+@app.route('/props')
 def get_props():
-    # TODO: FETCH PROPS FROM PRIZEPICKS
-    with open('./data/projections.json', 'r') as file:
-        json_data = json.load(file)
-        seive = {"points", "rebounds", "assists", "threes", "blocks", "steals", "pra", "pr", "pa", "ra"}
-        player_names = {elem["id"]: elem["attributes"]["name"]
-                        for elem in json_data["included"]
-                        if elem["type"] == "new_player"}
-        player_projections = []
-        for projection in json_data["data"]:
-            if projection["type"] == "projection":
-                player_id = projection["relationships"]["new_player"]["data"]["id"]
-                player_name = player_names.get(player_id, "Unknown Player")
+    # TODO: FETCH PROPS FROM BETTING PLATFORM
+    # DEFAULT = PRIZEPICKS
+    platform = request.args.get('platform').lower() or 'prizepicks'
+    if platform == 'prizepicks':
+        with open('./data/prizepicks_predicted_props.json') as file:
+            props_json = json.load(file)
+            if props_json['date'] == str(date.today()):
+                return props_json['props']
+            else:
+                with open('./data/projections.json', 'r') as file:
+                    json_data = json.load(file)
+                    seive = {"points", "rebounds", "assists", "threes", "blocks", "steals", "pra", "pr", "pa", "ra"}
+                    player_names = {elem["id"]: elem["attributes"]["name"]
+                                    for elem in json_data["included"]
+                                    if elem["type"] == "new_player"}
+                    player_projections = []
+                    for projection in json_data["data"]:
+                        if projection["type"] == "projection":
+                            player_id = projection["relationships"]["new_player"]["data"]["id"]
+                            player_name = player_names.get(player_id, "Unknown Player")
+                            projection_id = projection['id']
 
-                flash_sale = projection["attributes"].get("flash_sale_line_score")
-                line_score = projection["attributes"]["line_score"]
-                stat_type = statType(projection["attributes"]["stat_type"]).lower()
-                start_time = projection["attributes"]["start_time"]
+                            flash_sale = projection["attributes"].get("flash_sale_line_score")
+                            line_score = projection["attributes"]["line_score"]
+                            stat_type = statType(projection["attributes"]["stat_type"]).lower()
+                            start_time = projection["attributes"]["start_time"]
 
-                if stat_type in seive and projection["attributes"].get("adjusted_odds") is not True:
-                    player_projections.append({
-                        'player_name': player_name,
-                        'player_id': player_id,
-                        'stat_type': stat_type,
-                        'line_score': line_score,
-                        'start_time': start_time
-                    })
+                            if stat_type in seive and projection["attributes"].get("adjusted_odds") is not True:
+                                player_projections.append({
+                                    'projection_id': projection_id,
+                                    'player_name': player_name,
+                                    'player_id': player_id,
+                                    'stat_type': stat_type,
+                                    'line_score': line_score,
+                                    'start_time': start_time
+                                })
 
-                if stat_type in seive and flash_sale is not None:
-                    player_projections.append({
-                        'player_name': player_name,
-                        'player_id': player_id,
-                        'stat_type': stat_type,
-                        'line_score': flash_sale,
-                        'start_time': start_time
-                    })
-        data = []
-        for idx, player in enumerate(player_projections):
+                            if stat_type in seive and flash_sale is not None:
+                                player_projections.append({
+                                    'projection_id': projection_id,
+                                    'player_name': player_name,
+                                    'player_id': player_id,
+                                    'stat_type': stat_type,
+                                    'line_score': flash_sale,
+                                    'start_time': start_time
+                                })
+                    
+                    data = []
+                    for idx, player in enumerate(player_projections):
 
-            if(player['stat_type'] == 'points'):
-                print(f"PREDICTING {player['player_name']} AT {player['line_score']} {player['stat_type']} ({idx}/{len(player_projections)})")
-                try:
-                    model = PropsModelV1(player['player_name'], player['stat_type'], player['line_score'])
-                    prediction = model.get_prediction()
-                    player.update(prediction)
-                    print(player)
-                    data.append(player)
-                except:
-                    print(f"ERROR OCCURED WHILE PREDICTING {player['player_name']} AT {player['line_score']} {player['stat_type']}")
-                
+                        if(player['stat_type'] == 'points'):
+                            print(f"PREDICTING {player['player_name']} AT {player['line_score']} {player['stat_type']} ({idx}/{len(player_projections)})")
+                            try:
+                                model = PropsModelV1(player['player_name'], player['stat_type'], player['line_score'])
+                                prediction = model.get_prediction()
+                                player.update(prediction)
+                                print(player)
+                                data.append(player)
+                            except:
+                                print(f"ERROR OCCURED WHILE PREDICTING {player['player_name']} AT {player['line_score']} {player['stat_type']}")
+                    
+                    with open('./data/prizepicks_predicted_props.json', 'w') as out:
+                        out.write(json.dumps({'props': data, 'date': str(date.today())}))
 
-        return data
+                    return data
+    elif platform == 'draftkings':
+        return ''
