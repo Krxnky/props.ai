@@ -10,7 +10,7 @@ export default function Dashboard() {
             id: "2544",
         }
     ]
-    console.log(test_players)
+    // console.log(test_players)
     return (
         
         <div className="flex flex-col p-5 bg-zinc-900 pt-3">
@@ -19,8 +19,8 @@ export default function Dashboard() {
             {
                 test_players.map((player) => {
 
-                    {console.log("TRYING TO SEND THIS OBJECT to PROPITEM")}
-                    {console.log(player)}
+                    // {console.log("TRYING TO SEND THIS OBJECT to PROPITEM")}
+                    // {console.log(player)}
 
                     return <PropItem player={player} />
 
