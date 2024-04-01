@@ -17,7 +17,7 @@ class PropsModelV1():
 
     def get_prediction(self):
         player_id = players.find_players_by_full_name(self.player_name)[0]["id"]
-        point_threshold = self.line_score
+        print(players.find_players_by_full_name(self.player_name)[0])
 
         game_log = PlayerGameLog(player_id=player_id, season="2023-24").get_data_frames()[0]
         game_log2 = PlayerGameLog(player_id=player_id, season="2022-23").get_data_frames()[0]
@@ -35,13 +35,20 @@ class PropsModelV1():
         df['HOME'] = df['MATCHUP'].apply(lambda x: 1 if 'vs. ' in x else 0)
         df['OPPONENT'] = df['MATCHUP'].apply(lambda x: x.split()[-1])
 
-        features = ['HOME', 'AST', 'STL', 'REB', 'TOV', 'FG3M', 'FG3A', 'BLK', 'FGA', 'FGM', 'FTA', 'FTM', 'PLUS_MINUS']
-        target = 'PTS'
+        if self.stat_type == 'points':
+            features = ['HOME', 'AST', 'STL', 'REB', 'TOV', 'FG3M', 'FG3A', 'BLK', 'FGA', 'FGM', 'FTA', 'FTM', 'PLUS_MINUS']
+            target = 'PTS'
+        elif self.stat_type == 'rebounds':
+            features = ['HOME', 'AST', 'STL', 'PTS', 'TOV', 'FG3M', 'FG3A', 'BLK']
+            target = 'REB'
+        elif self.stat_type == 'assists':
+            features = ['HOME', 'PTS', 'STL', 'REB', 'TOV', 'FG3M', 'FG3A', 'BLK']
+            target = 'AST'
 
         x = df[features]
         y = df[target]
 
-        y = y.apply(lambda x: 1 if x > point_threshold else 0)
+        y = y.apply(lambda x: 1 if x > self.line_score else 0)
 
         scaler = StandardScaler()
         x_scaled = scaler.fit_transform(x)
@@ -59,6 +66,7 @@ class PropsModelV1():
         f1 = f1_score(y_test, predictions)
 
         return {
+            'player_id': player_id,
             'accuracy': accuracy,
             'precision': precision,
             'recall': recall,

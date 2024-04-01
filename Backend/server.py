@@ -97,7 +97,6 @@ def get_props():
                                 player_projections.append({
                                     'projection_id': projection_id,
                                     'player_name': player_name,
-                                    'player_id': player_id,
                                     'stat_type': stat_type,
                                     'line_score': line_score,
                                     'start_time': start_time
@@ -107,17 +106,17 @@ def get_props():
                                 player_projections.append({
                                     'projection_id': projection_id,
                                     'player_name': player_name,
-                                    'player_id': player_id,
                                     'stat_type': stat_type,
                                     'line_score': flash_sale,
                                     'start_time': start_time
                                 })
                     
                     data = []
+                    supported_stats = ['points', 'assists', 'rebounds']
                     for idx, player in enumerate(player_projections):
 
-                        if(player['stat_type'] == 'points'):
-                            print(f"PREDICTING {player['player_name']} AT {player['line_score']} {player['stat_type']} ({idx}/{len(player_projections)})")
+                        if(player['stat_type'] in supported_stats):
+                            print(f"PREDICTING {player['player_id']} AT {player['line_score']} {player['stat_type']} ({idx}/{len(player_projections)})")
                             try:
                                 model = PropsModelV1(player['player_name'], player['stat_type'], player['line_score'])
                                 prediction = model.get_prediction()
