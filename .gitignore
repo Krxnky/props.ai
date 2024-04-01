@@ -2,4 +2,5 @@ Backend/.venv
 Backend/.venv/Lib
 Backend/.venv/Scripts
 Backend/__pycache__
+Backend/*.ipynb
 node_modules
