@@ -1,4 +1,5 @@
 Backend/.venv
+Backend/my_project
 Backend/.venv/Lib
 Backend/.venv/Scripts
 Backend/__pycache__
