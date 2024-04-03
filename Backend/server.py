@@ -116,13 +116,14 @@ def get_props():
                     for idx, player in enumerate(player_projections):
 
                         if(player['stat_type'] in supported_stats):
-                            print(f"PREDICTING {player['player_id']} AT {player['line_score']} {player['stat_type']} ({idx}/{len(player_projections)})")
+                            print(f"PREDICTING {player['player_name']} AT {player['line_score']} {player['stat_type']} ({idx}/{len(player_projections)})")
                             try:
                                 model = PropsModelV1(player['player_name'], player['stat_type'], player['line_score'])
-                                prediction = model.get_prediction()
+                                prediction = model.predict()
                                 player.update(prediction)
                                 print(player)
                                 data.append(player)
+                                time.sleep(.5)
                             except:
                                 print(f"ERROR OCCURED WHILE PREDICTING {player['player_name']} AT {player['line_score']} {player['stat_type']}")
                     

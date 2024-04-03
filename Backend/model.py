@@ -15,7 +15,7 @@ class PropsModelV1():
         self.stat_type = stat_type
         self.line_score = line_score
 
-    def get_prediction(self):
+    def predict(self):
         player_id = players.find_players_by_full_name(self.player_name)[0]["id"]
         print(players.find_players_by_full_name(self.player_name)[0])
 
@@ -26,11 +26,11 @@ class PropsModelV1():
         frames = [pd.DataFrame(column), pd.DataFrame(column2)]
         df = pd.concat(frames)
 
-        df['PTS+REB+AST'] = df['PTS'] + df['REB'] + df['AST']
-        df['PTS+AST'] = df['PTS'] + df['AST']
-        df['REB+AST'] = df['REB'] + df['AST']
-        df['PTS+REB'] = df['PTS'] + df['REB']
-        df['BLKS+STLS'] = df['BLK'] + df['STL']
+        #df['PTS+REB+AST'] = df['PTS'] + df['REB'] + df['AST']
+        #df['PTS+AST'] = df['PTS'] + df['AST']
+        #df['REB+AST'] = df['REB'] + df['AST']
+        #df['PTS+REB'] = df['PTS'] + df['REB']
+        #df['BLKS+STLS'] = df['BLK'] + df['STL']
 
         df['HOME'] = df['MATCHUP'].apply(lambda x: 1 if 'vs. ' in x else 0)
         df['OPPONENT'] = df['MATCHUP'].apply(lambda x: x.split()[-1])
@@ -55,15 +55,23 @@ class PropsModelV1():
 
         x_train, x_test, y_train, y_test = train_test_split(x_scaled, y, test_size=0.4, random_state=42)
 
-        logisitc_regression_model = LogisticRegression(max_iter=1000)
-        logisitc_regression_model.fit(x_train, y_train)
+        logistic_regression_model = LogisticRegression(max_iter=1000)
+        logistic_regression_model.fit(x_train, y_train)
 
-        predictions = logisitc_regression_model.predict(x_test)
+        predictions = logistic_regression_model.predict(x_test)
 
         accuracy = accuracy_score(y_test, predictions)
         precision = precision_score(y_test, predictions)
         recall = recall_score(y_test, predictions)
         f1 = f1_score(y_test, predictions)
+
+        last3games = df[0:3]
+        d3 = {}
+        for f in features:
+            d3[f] = last3games[f].mean()
+        todays_games = pd.DataFrame([d3])
+        todays_games_scaled = scaler.transform(todays_games)
+        predictions2 = logistic_regression_model.predict(todays_games_scaled)
 
         return {
             'player_id': player_id,
@@ -71,5 +79,5 @@ class PropsModelV1():
             'precision': precision,
             'recall': recall,
             'f1': f1,
-            'prediction': 'OVER' if predictions[0] == 1 else 'UNDER'
+            'prediction': 'OVER' if predictions2[0] == 1 else 'UNDER'
         }
