@@ -3,12 +3,15 @@ import {createSlice, configureStore} from '@reduxjs/toolkit';
 export const platformSlice = createSlice({
     name: 'platform',
     initialState: {
-        value: 'PrizePicks',
+        value: {
+            platform: "PrizePicks",
+            img: "./platforms/pp.png"
+        },
         id: 0
     },
     reducers: {
-        changePlatform: (state, platform) => {
-            state.value = platform;
+        changePlatform: (state, action) => {
+            state.value = action;
         },
         
     },
