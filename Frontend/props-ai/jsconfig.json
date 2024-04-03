@@ -1,6 +1,7 @@
 {
   "include": [
-    "src/**/*.js"
+    "src/**/*.js",
+    "src/*/*.js"
 , "src/app/components/Dropdown.jsx"  ],
   "compilerOptions": {
     "paths": {
