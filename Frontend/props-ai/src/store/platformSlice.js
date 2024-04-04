@@ -5,7 +5,8 @@ export const platformSlice = createSlice({
     initialState: {
         value: {
             platform: "PrizePicks",
-            img: "./platforms/pp.png"
+            img: "./platforms/pp.png",
+            id: 0
         },
         id: 0
     },

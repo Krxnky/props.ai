@@ -13,10 +13,10 @@ export default function PropItem(player){
                 className="py-7"    
             />
             <div className="flex flex-col pl-10 ">
-                <p className="text-3xl text-white font-light" >
+                <p className="text-3xl text-white font-light" key={0}>
                     {player.player.name}
                 </p>
-                <p className="text-left text-sm font-thin">
+                <p className="text-left text-sm font-thin" key={1}>
                     {player.player.id}
                 </p>
             </div>
