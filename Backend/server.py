@@ -5,8 +5,10 @@ from flask import Flask, request
 from nba_api.stats.endpoints import playergamelog, ScoreboardV2, CommonTeamRoster
 from nba_api.stats.static.teams import find_team_name_by_id
 from model import PropsModelV1
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, origins=["http://localhost:3000"])
 
 @app.route("/get-players")
 # TODO: REPLACE WITH ACTUAL ACTIVE PLAYERS AND THEIR PROP LINES 
