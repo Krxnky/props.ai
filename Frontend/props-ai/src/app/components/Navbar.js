@@ -9,8 +9,6 @@ export default function Navbar() {
             <Image src={"/props_ai_temp_logo.png"} width={50} height={50}>
 
             </Image>
-            <Dropdown>
-            </Dropdown>
         </div>
     )
 }

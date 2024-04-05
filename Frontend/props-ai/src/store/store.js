@@ -1,3 +1,4 @@
+import { thunk } from "redux-thunk";
 import counterSlice from "./counterSlice";
 import counterReducer from "./counterSlice"
 import platformReducer from "./platformSlice";
@@ -7,5 +8,5 @@ export const store = configureStore({
     reducer: {
         counter: counterReducer,
         platform: platformReducer,
-    }
+    },
 })

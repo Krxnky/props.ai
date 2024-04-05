@@ -5,14 +5,14 @@ export const platformSlice = createSlice({
     initialState: {
         value: {
             platform: "PrizePicks",
-            img: "./platforms/pp.png",
+            img: "/pp.png",
             id: 0
         },
         id: 0
     },
     reducers: {
         changePlatform: (state, action) => {
-            state.value = action;
+            state.value = action.payload;
         },
         
     },

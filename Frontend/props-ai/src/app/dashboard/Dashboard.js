@@ -1,3 +1,4 @@
+import Dropdown from "../components/Dropdown"
 import PropItem from "./PropItem"
 export default function Dashboard() {
     const test_players = [
@@ -13,9 +14,11 @@ export default function Dashboard() {
     // console.log(test_players)
     return (
         
-        <div className="flex flex-col p-5 bg-zinc-900 pt-3">
+        <div className="flex flex-col py-5 bg-zinc-900 pt-3">
             {/* <PropItem player={test_players[0]} /> */}
-            
+            <div className="flex items-end pr-5 py-2 justify-end">
+                <Dropdown />
+            </div>
             {
                 test_players.map((player) => {
 
