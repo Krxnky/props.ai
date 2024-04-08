@@ -11,9 +11,9 @@ export default function PropInfoModal(){
     return (
         <>
             {modal == "true" && 
-                <div>
+                <div className="flex ease-out duration-300">
                     <dialog
-                        className="fixed left-0 top-0 w-full h-full bg-black bg-opacity-50 z-50 overflow-auto backdrop-blur flex justify-center items-center ease-in duration-300">
+                        className="fixed left-0 top-0 w-full h-full bg-black bg-opacity-10 z-50 overflow-auto backdrop-blur-sm flex justify-center items-center">
                         <div className="bg-zinc-900 m-auto p-8 rounded-md">
                             <div className="flex flex-row">
                                 <h3 className="text-white">Modal content</h3>

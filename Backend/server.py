@@ -85,6 +85,7 @@ def get_props():
                                     if elem["type"] == "new_player"}
                     player_projections = []
                     for projection in json_data["data"]:
+                        print(projection)
                         if projection["type"] == "projection":
                             player_id = projection["relationships"]["new_player"]["data"]["id"]
                             player_name = player_names.get(player_id, "Unknown Player")
@@ -92,6 +93,7 @@ def get_props():
 
                             flash_sale = projection["attributes"].get("flash_sale_line_score")
                             line_score = projection["attributes"]["line_score"]
+                            player_team = projection["attributes"]["description"]
                             stat_type = statType(projection["attributes"]["stat_type"]).lower()
                             start_time = projection["attributes"]["start_time"]
 
@@ -99,6 +101,7 @@ def get_props():
                                 player_projections.append({
                                     'projection_id': projection_id,
                                     'player_name': player_name,
+                                    'player_team' : player_team,
                                     'stat_type': stat_type,
                                     'line_score': line_score,
                                     'start_time': start_time

@@ -28,7 +28,7 @@ export default function Dropdown () {
     const activePlatform = useSelector((state) => state.platform.value)
     // const dispatch = useDispatch()
     const dispatch = useDispatch()
-    console.log(activePlatform)
+    // console.log(activePlatform)
     return(
         
         <div className="flex">
@@ -50,11 +50,11 @@ export default function Dropdown () {
                         key={index} 
                         className="flex items-center w-full px-4 py-2 space-x-2 rounded-sm hover:bg-gray-700 ease-in duration-100 text-white" 
                         >
-                            {console.log(platform.img)}
+                            {/* {console.log(platform.img)} */}
                             <img src={platform.img} alt={platform.platform} className="w-8 h-8" />
                             <span>{platform.platform}</span>
                         </DropdownMenuItem> :
-                        console.log(platform)
+                        null
                     ))}
                 </DropdownMenuContent>
             </DropdownMenu>
