@@ -4,7 +4,8 @@ export const acivePlayerSlice = createSlice({
     initialState:{
         value:{
             player_name: "John DOe",
-            img: ""
+            img: "/johndoepfp.png"
+            
         }
     }
 })
