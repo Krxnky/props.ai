@@ -7,18 +7,19 @@ export default function Dashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:5000/props?platform=prizepicks');
+                const response = await fetch('http://localhost:5000/props?platform=prizepicks')
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error('Network response was not ok')
                 }
-                const jsonData = await response.json();
-                setData(jsonData);
+                const jsonData = await response.json()
+                setData(jsonData)
+                console.log(jsonData)
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('Error fetching data:', error)
             }
-        };
+        }
 
-        fetchData();
+        fetchData()
     }, []);
     return (
         <div className="flex flex-col py-5 bg-zinc-900 pt-3">
