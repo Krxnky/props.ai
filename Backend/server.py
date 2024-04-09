@@ -8,7 +8,7 @@ from model import PropsModelV1
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:3000"])
+CORS(app)
 
 @app.route("/get-players")
 # TODO: REPLACE WITH ACTUAL ACTIVE PLAYERS AND THEIR PROP LINES 
