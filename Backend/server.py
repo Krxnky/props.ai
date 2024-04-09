@@ -111,6 +111,7 @@ def get_props():
                                 player_projections.append({
                                     'projection_id': projection_id,
                                     'player_name': player_name,
+                                    'player_team' : player_team,
                                     'stat_type': stat_type,
                                     'line_score': flash_sale,
                                     'start_time': start_time
