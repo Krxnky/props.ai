@@ -8,7 +8,7 @@ from model import PropsModelV1
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:3000"])
+CORS(app)
 
 @app.route("/get-players")
 # TODO: REPLACE WITH ACTUAL ACTIVE PLAYERS AND THEIR PROP LINES 
@@ -111,6 +111,7 @@ def get_props():
                                 player_projections.append({
                                     'projection_id': projection_id,
                                     'player_name': player_name,
+                                    'player_team' : player_team,
                                     'stat_type': stat_type,
                                     'line_score': flash_sale,
                                     'start_time': start_time
