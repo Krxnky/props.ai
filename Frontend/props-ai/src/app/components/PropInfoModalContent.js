@@ -14,7 +14,7 @@ export default function PropInfoModalContent(){
                                 <h3 className="text-white">{activePlayer.player_name}</h3>
                                 <br/>
                                 <Button
-                                    onClick={dispatch({type: 'propItemModal/changePropItemModal', payload: false})}
+                                    onClick={() => dispatch({type: 'propItemModal/changePropItemModal', payload: false})}
                                     className="bg-red-500 text-white p-2 "
                                 >
                                     Close Modal

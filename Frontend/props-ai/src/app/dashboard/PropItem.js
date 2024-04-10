@@ -2,21 +2,17 @@ import { Button } from "@nextui-org/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useDispatch} from "react-redux";
-
+import "./Bobbing-Arrow.css"
 export default function PropItem(player){
     const [propColor, setPropColor] = useState("");
     const dispatch = useDispatch()
-    const handleLinkClick = (e) => {
-        e.preventDefault();
-        // Add logic to open the modal here
-      };
     useEffect(() => {
         setPropColor(player.player.prediction == "UNDER" ? "red" : "green")
     }, [])   
     return (
         <>
             <Button
-                className="md:hidden flex flex-col items-center bg-zinc-800 rounded-xl p-5 m-2 max-w-72"
+                className="flex flex-col items-center bg-zinc-800 rounded-xl p-5 m-2 max-w-72"
                 onClick={() => {
                     dispatch({type: 'activePlayer/changeActivePlayer', payload: player.player})
                     dispatch({type: 'propItemModal/changePropItemModal', payload: true})
@@ -35,22 +31,30 @@ export default function PropItem(player){
                     <p className="text-sm text-white text-center font-light" key={1}>
                         {player.player.player_team}
                     </p>
-                    <p className={`text-3xl text-${propColor}-400 font-bold`} key={2}>
-                            {player.player.line_score}
+                    <div className="flex flex-row">
+                        <Image src={`/${propColor == "red" ? "UNDER" : "OVER"}.svg`} 
+                            width={25}
+                            height={25}
+                            className={`${propColor == "red" ? "animate-bounce" : "rotate-180 animate-bounce-reverse"} pt-1`} 
+                        />
+                        <p className={`text-3xl text-${propColor}-400 font-bold pl-1`} key={2}>
+                                {`${player.player.line_score}`}
+                        </p>
+                    </div>
+                    <p className="text-sm text-white text-center font-bold" key={1}>
+                        {player.player.stat_type}
                     </p>
                 </div>
                 </div> 
             </Button>
-            <Button
-                className="hidden md:flex bg-zinc-800 rounded-xl p-5 m-2" 
+            {/* <Button
+                className="hidden md:flex w-full bg-zinc-800 rounded-xl p-5 m-2" 
                 onClick={() => {
                     dispatch({type: 'activePlayer/changeActivePlayer', payload: player.player})
                     dispatch({type: 'propItemModal/changePropItemModal', payload: true})
                     }}>
                 
                 <div className="flex flex-row">
-                    {/* {console.log("PLAYER OBJECT")}
-                    {console.log(player.player.id)} */}
                     <Image 
                         src={`https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${player.player.player_id}.png`}
                         width={175}
@@ -84,7 +88,7 @@ export default function PropItem(player){
                         </div>
                     </div>
                 </div>
-            </Button>
+            </Button> */}
         </>
         // <div className="flex flex-row bg-0f0f12 rounded-lg p-4 m-2">
         //     <Image src={`https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${player.player.id}.png`} alt={player.player.name} width={50} height={50} className="flex-grow" />

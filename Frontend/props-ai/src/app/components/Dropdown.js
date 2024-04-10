@@ -31,7 +31,7 @@ export default function Dropdown () {
     // console.log(activePlatform)
     return(
         
-        <div className="flex max-md:justify-center">
+        <div className="flex max-md:justify-center z-20">
             <DropdownMenu>
                 <DropdownMenuTrigger 
                 className="flex items-center justify-center w-full h-full py-1 pr-7 pl-4 bg-gray-800 rounded-sm mt-1 hover:bg-gray-700 ease-in duration-100">
