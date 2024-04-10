@@ -1,11 +1,30 @@
+import { createSlice } from "@reduxjs/toolkit";
 
-export const acivePlayerSlice = createSlice({
+export const activePlayerSlice = createSlice({
     name: 'activePlayer',
     initialState:{
         value:{
-            player_name: "John DOe",
-            img: "/johndoepfp.png"
-            
+            accuracy: 'default',
+            f1: 'default',
+            line_score: 'default',
+            player_id: 'default',
+            player_name: 'John Doe',
+            player_team: 'default',
+            precision: 'default',
+            prediction: 'default',
+            projection_id: 'default',
+            recall: 'default',
+            start_time: 'default',
+            stat_type: 'default'
+          },
+        id: 0
+    },
+    reducers: {
+        changeActivePlayer: (state, action) => {
+            state.value = action.payload;
         }
     }
 })
+
+export const {changeActivePlayer} = activePlayerSlice.actions
+export default activePlayerSlice.reducer
