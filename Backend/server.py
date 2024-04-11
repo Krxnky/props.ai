@@ -54,8 +54,6 @@ def get_players():
 
 @app.route('/props')
 def get_props():
-    # TODO: FETCH PROPS FROM BETTING PLATFORM
-    # DEFAULT = PRIZEPICKS
     platform = request.args.get('platform').lower() or 'prizepicks'
     if platform == 'prizepicks':
         with open('./data/prizepicks_predicted_props.json') as file:
@@ -78,7 +76,8 @@ def get_props():
                             print(player)
                             data.append(player)
                             time.sleep(.5)
-                        except:
+                        except Exception as e:
+                            print(e)
                             print(f"ERROR OCCURED WHILE PREDICTING {player['player_name']} AT {player['line_score']} {player['stat_type']}")
                 
                 with open('./data/prizepicks_predicted_props.json', 'w') as out:
