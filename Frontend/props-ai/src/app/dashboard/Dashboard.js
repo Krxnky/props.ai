@@ -4,6 +4,7 @@ import PropItem from "./PropItem"
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
 import PropInfoModal from "../components/PropInfoModal";
+
 export default function Dashboard() {
     const [data, setData] = useState([]);
 
@@ -19,6 +20,38 @@ export default function Dashboard() {
                 console.log(jsonData)
             } catch (error) {
                 console.error('Error fetching data:', error)
+                // term(props)
+                setData([
+                    {
+                      "projection_id": "2218712",
+                      "player_name": "Miles Bridges",
+                      "player_team": "POR",
+                      "stat_type": "points",
+                      "line_score": 23.5,
+                      "start_time": "2024-04-03T19:10:00-04:00",
+                      "player_id": 1628970,
+                      "accuracy": 0.8518518518518519,
+                      "precision": 0.8571428571428571,
+                      "recall": 0.6666666666666666,
+                      "f1": 0.75,
+                      "prediction": "UNDER"
+                    },
+                    {
+                      "projection_id": "2218713",
+                      "player_name": "Deandre Ayton",
+                      "player_team": "CHA",
+                      "stat_type": "points",
+                      "line_score": 22.5,
+                      "start_time": "2024-04-03T19:10:00-04:00",
+                      "player_id": 1629028,
+                      "accuracy": 0.9166666666666666,
+                      "precision": 0.6923076923076923,
+                      "recall": 1,
+                      "f1": 0.8181818181818182,
+                      "prediction": "OVER"
+                    },
+                ])
+                
             }
         }
 

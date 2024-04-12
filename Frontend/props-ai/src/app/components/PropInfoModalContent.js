@@ -2,10 +2,14 @@ import { Button } from "@nextui-org/react"
 import Link from "next/link"
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux"
+import { BarChart, CartesianGrid, Bar, XAxis, YAxis, Tooltip, Legend} from "recharts"
+
 
 export default function PropInfoModalContent(){
     const activePlayer = useSelector((state) => state.activePlayer.value)
     const dispatch = useDispatch()
+    const data = [{ name: 'a', value: 12 }]
+    [{ name: 'a', value: [5, 12] }];
     return(
         <div>
                     <dialog
@@ -17,14 +21,34 @@ export default function PropInfoModalContent(){
                                 >
                                     <Image 
                                         src={`/close.svg`}
-                                        width={25}
-                                        height={25}
+                                        width={15}
+                                        height={15}
                                         />
                                 </Button>
-                                <h3 className="text-white">{activePlayer.player_name}</h3>
+                                <div className="flex-row">
+                                    <Image 
+                                        src={`https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${activePlayer.player_id}.png`}
+                                        width={175}
+                                        height={175} 
+                                        className="py-7"    
+                                    />
+                                    <div className="flex-row">
+
+                                        <h3 className="text-white text-left font-semibold text-xl" >{activePlayer.player_name}</h3>
+                                        <h3 className="text-white text-left font-light text-xl" >{activePlayer.player_team}</h3>
+                                    </div>
+                                </div>
                                 <br/>
                             </div>
-
+                            <BarChart width={730} height={250} data={data}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+                                <Bar dataKey="pv" fill="#8884d8" />
+                                <Bar dataKey="uv" fill="#82ca9d" />
+                            </BarChart>
                         </div>
                     </dialog>
                 </div>
