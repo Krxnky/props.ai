@@ -54,15 +54,16 @@ def get_players():
 
 @app.route('/props')
 def get_props():
-    platform = request.args.get('platform').lower() or 'prizepicks'
+    platform = request.args.get('platform') or 'prizepicks'
     if platform == 'prizepicks':
+        print(platform)
         with open('./data/prizepicks_predicted_props.json') as file:
             props_json = json.load(file)
             if props_json['date'] == str(date.today()):
                 return props_json['props']
             else:
                 prize_picks = PrizePicks()
-                player_projections = prize_picks.fetchProps()
+                player_projections = prize_picks.fetchProps(read_from_file=True)
                 data = []
                 supported_stats = ['points', 'assists', 'rebounds']
                 for idx, player in enumerate(player_projections):

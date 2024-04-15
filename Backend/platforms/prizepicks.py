@@ -11,10 +11,16 @@ class PrizePicks():
         self.options = FirefoxOptions()
         self.options.add_argument('--headless')
         self.driver = webdriver.Firefox(options=self.options)
-    def fetchProps(self):
-        self.driver.get(self.url)
-        data = self.driver.find_element(By.TAG_NAME, 'pre').text
-        json_data = json.loads(data)
+    def fetchProps(self, read_from_file = False):
+        if read_from_file:
+            json_data = json.load(open('./data/projections.json'))
+        else: 
+            self.driver.get(self.url)
+            data = self.driver.find_element(By.TAG_NAME, 'pre').text
+            json_data = json.loads(data)
+            with open('./data/projections.json', 'w') as out:
+                out.write(json.dumps(json_data))
+            
         seive = {"points", "rebounds", "assists", "threes", "blocks", "steals", "pra", "pr", "pa", "ra"}
         player_names = {elem["id"]: elem["attributes"]["name"]
                         for elem in json_data["included"]
@@ -51,6 +57,7 @@ class PrizePicks():
                         'line_score': flash_sale,
                         'start_time': start_time
                     })
+
         return player_projections
     def statType(self, stat):
         # find the stat retrieved
