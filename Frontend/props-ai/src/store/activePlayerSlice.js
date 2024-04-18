@@ -15,7 +15,8 @@ export const activePlayerSlice = createSlice({
             projection_id: 'default',
             recall: 'default',
             start_time: 'default',
-            stat_type: 'default'
+            stat_type: 'default',
+            lastTen: []
           },
         id: 0
     },

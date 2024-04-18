@@ -34,22 +34,74 @@ export default function Dashboard() {
                       "precision": 0.8571428571428571,
                       "recall": 0.6666666666666666,
                       "f1": 0.75,
-                      "prediction": "UNDER"
+                      "prediction": "UNDER",
+                      "lastTen": [
+                        {
+                            "isHome": false,
+                            "stat_score": 10,
+                            "vs": "POR"
+                        },
+                        {
+                            "isHome": true,
+                            "stat_score": 30,
+                            "vs": "POR"
+                        },
+                        {
+                            "isHome": false,
+                            "stat_score": 10,
+                            "vs": "POR"
+                        },
+                        {
+                            "isHome": false,
+                            "stat_score": 10,
+                            "vs": "POR"
+                        },
+                        {
+                            "isHome": false,
+                            "stat_score": 10,
+                            "vs": "POR"
+                        },
+                        {
+                            "isHome": false,
+                            "stat_score": 10,
+                            "vs": "POR"
+                        },
+                        {
+                            "isHome": false,
+                            "stat_score": 10,
+                            "vs": "POR"
+                        },
+                        {
+                            "isHome": false,
+                            "stat_score": 10,
+                            "vs": "POR"
+                        },
+                        {
+                            "isHome": false,
+                            "stat_score": 10,
+                            "vs": "POR"
+                        },
+                        {
+                            "isHome": false,
+                            "stat_score": 10,
+                            "vs": "POR"
+                        }
+                    ]
                     },
-                    {
-                      "projection_id": "2218713",
-                      "player_name": "Deandre Ayton",
-                      "player_team": "CHA",
-                      "stat_type": "points",
-                      "line_score": 22.5,
-                      "start_time": "2024-04-03T19:10:00-04:00",
-                      "player_id": 1629028,
-                      "accuracy": 0.9166666666666666,
-                      "precision": 0.6923076923076923,
-                      "recall": 1,
-                      "f1": 0.8181818181818182,
-                      "prediction": "OVER"
-                    },
+                // {
+                //   "projection_id": "2218713",
+                //   "player_name": "Deandre Ayton",
+                //   "player_team": "CHA",
+                //   "stat_type": "points",
+                //   "line_score": 22.5,
+                //   "start_time": "2024-04-03T19:10:00-04:00",
+                //   "player_id": 1629028,
+                //   "accuracy": 0.9166666666666666,
+                //   "precision": 0.6923076923076923,
+                //   "recall": 1,
+                //   "f1": 0.8181818181818182,
+                //   "prediction": "OVER"
+                // },
                 ])
                 
             }

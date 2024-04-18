@@ -2,14 +2,12 @@ import { Button } from "@nextui-org/react"
 import Link from "next/link"
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux"
-import { BarChart, CartesianGrid, Bar, XAxis, YAxis, Tooltip, Legend} from "recharts"
+import CustomChart from "./CustomChart";
 
 
 export default function PropInfoModalContent(){
     const activePlayer = useSelector((state) => state.activePlayer.value)
     const dispatch = useDispatch()
-    const data = [{ name: 'a', value: 12 }]
-    [{ name: 'a', value: [5, 12] }];
     return(
         <div>
                     <dialog
@@ -40,15 +38,7 @@ export default function PropInfoModalContent(){
                                 </div>
                                 <br/>
                             </div>
-                            <BarChart width={730} height={250} data={data}>
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="name" />
-                                <YAxis />
-                                <Tooltip />
-                                <Legend />
-                                <Bar dataKey="pv" fill="#8884d8" />
-                                <Bar dataKey="uv" fill="#82ca9d" />
-                            </BarChart>
+                            <CustomChart />
                         </div>
                     </dialog>
                 </div>

@@ -87,3 +87,4 @@ def get_props():
                 return data
     elif platform == 'draftkings':
         return ''
+
