@@ -37,8 +37,28 @@ export default function Dashboard() {
                       "prediction": "UNDER",
                       "lastTen": [
                         {
+                            "isHome": true,
+                            "stat_score": 20,
+                            "vs": "POR"
+                        },
+                        {
                             "isHome": false,
-                            "stat_score": 10,
+                            "stat_score": 30,
+                            "vs": "POR"
+                        },
+                        {
+                            "isHome": true,
+                            "stat_score": 15,
+                            "vs": "POR"
+                        },
+                        {
+                            "isHome": false,
+                            "stat_score": 22,
+                            "vs": "POR"
+                        },
+                        {
+                            "isHome": true,
+                            "stat_score": 24,
                             "vs": "POR"
                         },
                         {
@@ -47,38 +67,18 @@ export default function Dashboard() {
                             "vs": "POR"
                         },
                         {
-                            "isHome": false,
-                            "stat_score": 10,
+                            "isHome": true,
+                            "stat_score": 23,
                             "vs": "POR"
                         },
                         {
                             "isHome": false,
-                            "stat_score": 10,
+                            "stat_score": 9,
                             "vs": "POR"
                         },
                         {
-                            "isHome": false,
-                            "stat_score": 10,
-                            "vs": "POR"
-                        },
-                        {
-                            "isHome": false,
-                            "stat_score": 10,
-                            "vs": "POR"
-                        },
-                        {
-                            "isHome": false,
-                            "stat_score": 10,
-                            "vs": "POR"
-                        },
-                        {
-                            "isHome": false,
-                            "stat_score": 10,
-                            "vs": "POR"
-                        },
-                        {
-                            "isHome": false,
-                            "stat_score": 10,
+                            "isHome": true,
+                            "stat_score": 25,
                             "vs": "POR"
                         },
                         {
