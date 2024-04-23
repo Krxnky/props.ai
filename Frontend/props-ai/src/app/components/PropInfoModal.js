@@ -9,7 +9,7 @@ import { useEffect } from "react"
 export default function PropInfoModal(){
     const modalActive = useSelector((state) => state.propItemModal.value)
     useEffect(() => {
-        console.log(modalActive)
+        // console.log(modalActive)
     })
     return (
         <>

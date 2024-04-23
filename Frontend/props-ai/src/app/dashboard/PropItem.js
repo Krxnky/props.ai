@@ -22,26 +22,34 @@ export default function PropItem(player){
                         src={`https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${player.player.player_id}.png`}
                         width={175}
                         height={175} 
-                        className="py-7"    
+                        className="py-7" 
+                        alt={player.player.player_name}   
                     />
                 <div className="flex flex-col items-center">
-                    <p className="text-3xl text-white text-center font-light" key={0}>
+                    <p className="text-3xl text-white text-center font-light">
                         {player.player.player_name}
                     </p>
-                    <p className="text-sm text-white text-center font-light" key={1}>
-                        {player.player.player_team}
-                    </p>
+                    <div className="flex flex-row justify-center items-center">
+                        <p className="text-sm text-white text-center font-light">
+                            {player.player.player_team}
+                        </p>
+                        <Image 
+                            src={`/teams/${player.player.player_team}.svg`} 
+                            width={25} 
+                            height={25} 
+                        />
+                    </div>
                     <div className="flex flex-row">
                         <Image src={`/${propColor == "red" ? "UNDER" : "OVER"}.svg`} 
                             width={25}
                             height={25}
                             className={`${propColor == "red" ? "animate-bounce" : "rotate-180 animate-bounce-reverse"} pt-1`} 
                         />
-                        <p className={`text-3xl text-${propColor}-400 font-bold pl-1`} key={2}>
+                        <p className={`text-3xl text-${propColor}-400 font-bold pl-1`}>
                                 {`${player.player.line_score}`}
                         </p>
                     </div>
-                    <p className="text-sm text-white text-center font-bold" key={1}>
+                    <p className="text-sm text-white text-center font-bold">
                         {player.player.stat_type}
                     </p>
                 </div>

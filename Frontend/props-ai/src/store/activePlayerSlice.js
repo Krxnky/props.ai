@@ -10,6 +10,7 @@ export const activePlayerSlice = createSlice({
             player_id: 'default',
             player_name: 'John Doe',
             player_team: 'default',
+            team_id: 'default',
             precision: 'default',
             prediction: 'default',
             projection_id: 'default',

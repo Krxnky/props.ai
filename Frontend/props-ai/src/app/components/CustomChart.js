@@ -25,9 +25,9 @@ export default function CustomChart() {
         </p>
     }
     useEffect(() => {
-        console.log(activePlayer)
-        console.log(data)
-        console.log(currentLineScore)
+        // console.log(activePlayer)
+        // console.log(data)
+        // console.log(currentLineScore)
     })
     return (
         <div className="">
@@ -39,10 +39,11 @@ export default function CustomChart() {
                     <XAxis dataKey="name" />
                     <YAxis /> 
                     <Tooltip content={<CustomTooltip data={data} />}/>
-                    <Bar dataKey="uv" >
+                    <Bar dataKey="uv" label={{ fill: '#708090', fontSize: 20, fontWeight: 'bold'}}>
                         {
                             data.map((entry, index) =>(
                                 <Cell 
+
                                     key={`gameStatBar-${index}`} 
                                     fill={entry.amt > currentLineScore ? "#66BB6A" : entry.amt == currentLineScore ? "#474747" : "#EF5350" }
                                 />
