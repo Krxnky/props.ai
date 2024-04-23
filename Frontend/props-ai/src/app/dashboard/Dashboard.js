@@ -25,7 +25,7 @@ export default function Dashboard() {
                     {
                       "projection_id": "2218712",
                       "player_name": "Miles Bridges",
-                      "player_team": "POR",
+                      "player_team": "CHA",
                       "team_id": 1610612757,
                       "stat_type": "points",
                       "line_score": 23.5,

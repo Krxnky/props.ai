@@ -5,6 +5,7 @@ import { useDispatch} from "react-redux";
 import "./Bobbing-Arrow.css"
 export default function PropItem(player){
     const [propColor, setPropColor] = useState("");
+    const [percentageColor, setPercentageColor] = useState("")
     const dispatch = useDispatch()
     useEffect(() => {
         setPropColor(player.player.prediction == "UNDER" ? "red" : "green")
@@ -17,8 +18,11 @@ export default function PropItem(player){
                     dispatch({type: 'activePlayer/changeActivePlayer', payload: player.player})
                     dispatch({type: 'propItemModal/changePropItemModal', payload: true})
                     }}>
-               <div className="flex flex-col items-center">
-                <Image 
+                <div className="flex rounded-xl items-center justify-center bg-green-400 w-full">
+                    <p className="font-bold">{`${player.player.f1} %`}</p>
+                </div>
+                <div className="flex flex-col items-center">
+                    <Image 
                         src={`https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${player.player.player_id}.png`}
                         width={175}
                         height={175} 

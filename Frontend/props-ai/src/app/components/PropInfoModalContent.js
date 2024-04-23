@@ -31,9 +31,15 @@ export default function PropInfoModalContent(){
                                         className="py-7"    
                                     />
                                     <div className="flex-row">
-
                                         <h3 className="text-white text-left font-semibold text-xl" >{activePlayer.player_name}</h3>
-                                        <h3 className="text-white text-left font-light text-xl" >{activePlayer.player_team}</h3>
+                                        <div className="flex flex-row">
+                                            <h3 className="text-white text-left font-light text-xl" >{`${activePlayer.player_team} `}</h3>
+                                            <Image 
+                                                src={`/teams/${activePlayer.player_team}.svg`} 
+                                                width={25} 
+                                                height={25} 
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                                 <br/>

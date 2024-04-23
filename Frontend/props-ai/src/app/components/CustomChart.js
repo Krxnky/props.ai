@@ -39,7 +39,7 @@ export default function CustomChart() {
                     <XAxis dataKey="name" />
                     <YAxis /> 
                     <Tooltip content={<CustomTooltip data={data} />}/>
-                    <Bar dataKey="uv" label={{ fill: '#708090', fontSize: 20, fontWeight: 'bold'}}>
+                    <Bar dataKey="uv" label={{ fill: '#000000', fontSize: 20, fontWeight: 'bold'}}>
                         {
                             data.map((entry, index) =>(
                                 <Cell 
