@@ -3,13 +3,17 @@ import Link from "next/link"
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux"
 import CustomChart from "./CustomChart";
+import { Inconsolata } from "next/font/google";
 
-
+const inconsolata = Inconsolata({
+    subsets: ['latin'],
+    weight: ['300','400','500']
+})
 export default function PropInfoModalContent(){
     const activePlayer = useSelector((state) => state.activePlayer.value)
     const dispatch = useDispatch()
     return(
-        <div>
+        <div className={inconsolata.className}>
                     <dialog
                         className="fixed left-0 top-0 w-full h-full bg-black bg-opacity-10 z-50 overflow-auto backdrop-blur-sm flex justify-center items-center">
                         <div className="bg-zinc-900 m-auto p-8 rounded-md">
