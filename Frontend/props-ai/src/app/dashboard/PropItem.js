@@ -21,13 +21,13 @@ export default function PropItem(player){
     return (
         <div className={`${inconsolata.className}`}>
             <Button
-                className="flex flex-col items-center bg-zinc-800 rounded-xl p-5 m-2 max-w-72"
+                className="flex flex-col items-center bg-zinc-800 rounded-xl p-5 m-2 w-72"
                 onClick={() => {
                     dispatch({type: 'activePlayer/changeActivePlayer', payload: player.player})
                     dispatch({type: 'propItemModal/changePropItemModal', payload: true})
                     }}>
                 <div className="flex rounded-xl items-center justify-center bg-green-400 w-full">
-                    <p className="font-bold">{`${player.player.f1} %`}</p>
+                    <p className="font-bold">{`${player.player.f1.toFixed(2)}`}</p>
                 </div>
                 <div className="flex flex-col items-center">
                     <Image 
@@ -38,7 +38,7 @@ export default function PropItem(player){
                         alt={player.player.player_name}   
                     />
                 <div className="flex flex-col items-center">
-                    <p className="text-3xl text-white text-center font-light">
+                    <p className="text-3xl flex-grow text-white text-center font-light">
                         {player.player.player_name}
                     </p>
                     <div className="flex flex-row justify-center items-center">

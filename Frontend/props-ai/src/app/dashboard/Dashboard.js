@@ -120,7 +120,7 @@ export default function Dashboard() {
                 </div>
                 <div 
                 // className="max-md:grid max-md:grid-cols-2 md:flex-col max-md:justify-items-center"
-                className="grid max-md:grid-cols-2 md:grid-cols-5 max-md:justify-items-center"
+                className="grid max-md:grid-cols-2 md:grid-cols-5 justify-items-center"
                 >
 
                     {
