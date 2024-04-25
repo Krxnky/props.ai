@@ -5,3 +5,5 @@ Backend/.venv/Scripts
 Backend/platforms/__pycache__
 Backend/__pycache__
 node_modules
+Frontend/node_modules
+Backend/model_test.ipynb
