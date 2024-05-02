@@ -15,8 +15,9 @@ const inconsolata = Inconsolata({
 })
 export default function Home() {
   
-  const [mainLinkHoverClassname, setMainLinkHoverClassname] = useState("animate-slide-out")
-
+  const [mainLinkHoverClassname, setMainLinkHoverClassname] = useState("hidden")
+  const [titleLinkHoverClassname, setTitleLinkHoverClassname] = useState("")
+  
   useEffect(() => {
     console.log("mainLinkHoverClassname:" + mainLinkHoverClassname)
   })
@@ -24,13 +25,23 @@ export default function Home() {
     <Provider store={store} >
       <main className="flex min-h-screen flex-col items-center justify-center pb-20 bg-zinc-900">
         <Link 
-          className="text-white" 
-          // onMouseEnter={() => setMainLinkHoverClassname("animate-bounce")}
+          className="flex flex-row items-end justify-center text-white" 
+          onMouseOver={() => {
+            setMainLinkHoverClassname("absolute flex flex-row animate-slide-out-right pb-2 pl-80")
+            setTitleLinkHoverClassname("animate-slide-out-left")
+          }}
           // onMouseLeave={() => setMainLinkHoverClassname("hidden")}
           href={"/dashboard"}
           >
-          <h1 className={`${inconsolata.className} text-6xl`}>PROPS.AI</h1>
-          <h1 className={`${mainLinkHoverClassname} text-4xl font-extralight`}>GO</h1>   
+          <h1 className={`${inconsolata.className} ${titleLinkHoverClassname} text-6xl`}>PROPS.AI</h1>
+          <div className={`${mainLinkHoverClassname}`}> 
+            <h1 className={`text-4xl font-extralight`}>GO</h1>  
+            <Image 
+              src={`/GoArrow.svg`}
+              width={30}
+              height={30}
+            /> 
+          </div>
         </Link>
         {/* {console.log(data)} */}
         {/* <PropItem player={{

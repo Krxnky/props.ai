@@ -1,5 +1,5 @@
-@keyframes slide-out{
-    0%, 50%{
+@keyframes slide-out-right{
+    0%{
         transform: translateX(-25%);
         animation-timing-function: cubic-bezier(0,0,0.2,1);
     }
@@ -8,7 +8,19 @@
         animation-timing-function: cubic-bezier(0.8,0,1,1);
     }
 }
-
-.animate-slide-out{
-    animation: slide-out 1s;
+@keyframes slide-out-left{
+    0%, 75%{
+        transform: none;
+        animation-timing-function: cubic-bezier(0,0,0.2,1);
+    }
+    100%{
+        transform: translateX(-5%);
+        animation-timing-function: cubic-bezier(0.8,0,1,1);
+    }
+}
+.animate-slide-out-right{
+    animation: slide-out-right 1s;
+}
+.animate-slide-out-left{
+    animation: slide-out-left 1s;
 }
