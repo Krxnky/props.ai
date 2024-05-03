@@ -28,7 +28,7 @@ export default function Home() {
           className="flex flex-row items-end justify-center text-white" 
           onMouseOver={() => {
             setMainLinkHoverClassname("absolute flex flex-row animate-slide-out-right pb-2 pl-80")
-            setTitleLinkHoverClassname("animate-slide-out-left")
+            // setTitleLinkHoverClassname("animate-slide-out-left")
           }}
           // onMouseLeave={() => setMainLinkHoverClassname("hidden")}
           href={"/dashboard"}
