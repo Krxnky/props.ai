@@ -15,7 +15,7 @@ const inconsolata = Inconsolata({
 })
 export default function Home() {
   
-  const [mainLinkHoverClassname, setMainLinkHoverClassname] = useState("hidden")
+  const [mainLinkHoverClassname, setMainLinkHoverClassname] = useState("md:hidden max-md:flex max-md:flex max-md:flex-row max-md:animate-bounce max-md:pt-2 md:pb-2 md:pl-80")
   const [titleLinkHoverClassname, setTitleLinkHoverClassname] = useState("")
   
   useEffect(() => {
@@ -25,12 +25,13 @@ export default function Home() {
     <Provider store={store} >
       <main className="flex min-h-screen flex-col items-center justify-center pb-20 bg-zinc-900">
         <Link 
-          className="flex flex-row items-end justify-center text-white" 
-          onMouseOver={() => {
+          className="flex md:flex-row max-md:flex-col md:items-end max-md:items-center justify-center text-white" 
+          onMouseEnter={() => {
             setMainLinkHoverClassname("absolute flex flex-row animate-slide-out-right pb-2 pl-80")
             // setTitleLinkHoverClassname("animate-slide-out-left")
-          }}
-          // onMouseLeave={() => setMainLinkHoverClassname("hidden")}
+          }
+          }
+          onMouseLeave={() => setMainLinkHoverClassname("absolute flex flex-row animate-slide-out-right-reverse pb-2 pl-80 opacity-0")}
           href={"/dashboard"}
           >
           <h1 className={`${inconsolata.className} ${titleLinkHoverClassname} text-6xl`}>PROPS.AI</h1>

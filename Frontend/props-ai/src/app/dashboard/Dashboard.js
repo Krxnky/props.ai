@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Dropdown from "../components/Dropdown"
 import PropItem from "./PropItem"
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
 import PropInfoModal from "../components/PropInfoModal";
+import PropItemLoading from "./PropItemLoading";
 
 export default function Dashboard() {
     const [data, setData] = useState([]);
@@ -129,7 +130,9 @@ export default function Dashboard() {
                             // {console.log("TRYING TO SEND THIS OBJECT to PROPITEM")}
                             // {console.log(player)}
 
-                            return <PropItem player={player} />
+                            return (<Suspense fallback={<PropItemLoading />}>
+                                        <PropItem player={player} />
+                                    </Suspense>)
 
                             })
                             

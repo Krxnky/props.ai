@@ -30,10 +30,30 @@ export default function CustomChart() {
         // console.log(currentLineScore)
     })
     return (
-        <div className="">
-            <ResponsiveContainer width={600} height={250}>
-                
+        <div className>
+            <ResponsiveContainer className={`max-md:hidden`} width={600} height={250}>
                 <BarChart data={data}>
+                    <CartesianGrid horizontal={false} vertical={false} height={currentLineScore}/>
+                    <ReferenceLine strokeDasharray={"25 25"} y={currentLineScore} />
+                    <XAxis dataKey="name" />
+                    <YAxis /> 
+                    <Tooltip content={<CustomTooltip data={data} />}/>
+                    <Bar dataKey="uv" label={{ fill: '#000000', fontSize: 20, fontWeight: 'bold'}}>
+                        {
+                            data.map((entry, index) =>(
+                                <Cell 
+
+                                    key={`gameStatBar-${index}`} 
+                                    fill={entry.amt > currentLineScore ? "#66BB6A" : entry.amt == currentLineScore ? "#474747" : "#EF5350" }
+                                />
+                            ))
+                        }
+                    </Bar>
+                </BarChart>
+            </ResponsiveContainer>
+
+            <ResponsiveContainer className={`md:hidden`} width={300} height={125}>
+                <BarChart data={data.slice(0, 5)}>
                     <CartesianGrid horizontal={false} vertical={false} height={currentLineScore}/>
                     <ReferenceLine strokeDasharray={"25 25"} y={currentLineScore} />
                     <XAxis dataKey="name" />
