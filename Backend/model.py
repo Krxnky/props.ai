@@ -72,7 +72,7 @@ class PropsModelV1():
         todays_games = pd.DataFrame([d3])
         todays_games_scaled = scaler.transform(todays_games)
         predictions2 = logistic_regression_model.predict(todays_games_scaled)
-
+        
         return {
             'player_id': player_id,
             'accuracy': accuracy,
