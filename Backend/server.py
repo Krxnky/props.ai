@@ -2,7 +2,7 @@ import time
 import json
 from datetime import date
 from flask import Flask, request
-from nba_api.stats.endpoints import playergamelog, ScoreboardV2, CommonTeamRoster
+from nba_api.stats.endpoints import PlayerGameLog, ScoreboardV2, CommonTeamRoster
 from nba_api.stats.static.teams import find_team_name_by_id
 from model import PropsModelV1
 from flask_cors import CORS
@@ -88,3 +88,8 @@ def get_props():
     elif platform == 'draftkings':
         return ''
 
+@app.route('/last10')
+def get_last_ten():
+    player_id = request.args.get('player_id')
+    pgl = PlayerGameLog(player_id=player_id).get_data_frames()[0][0:10]
+    return pgl
