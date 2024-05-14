@@ -91,5 +91,7 @@ def get_props():
 @app.route('/last10')
 def get_last_ten():
     player_id = request.args.get('player_id')
+    stat_type = request.args.get('stat_type')
     pgl = PlayerGameLog(player_id=player_id).get_data_frames()[0][0:10]
-    return pgl
+    returnable = []
+    return type(pgl)
