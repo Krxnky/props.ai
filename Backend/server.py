@@ -106,17 +106,18 @@ def get_last_ten():
     if(len(PlayoffGameLog) >= 10):
         PlayoffGameLog = PlayoffGameLog[0:10]
         
-    RegularSeasonGameLog = PlayerGameLog(player_id=player_id).get_data_frames()[0] if len(PlayoffGameLog) < 10 else None
+    RegularSeasonGameLog = PlayerGameLog(player_id=player_id).get_data_frames()[0][0:(10 - len(PlayoffGameLog))] if len(PlayoffGameLog) < 10 else None
     df = None
     if(RegularSeasonGameLog is not None):
         RegularSeasonGameLog["SEASON_TYPE"] = "Regular Season"
-        df = pandas.concat([RegularSeasonGameLog[[stat_type, "MATCHUP", "GAME_DATE", "SEASON_TYPE"]], PlayoffGameLog[[stat_type, "MATCHUP", "GAME_DATE", "SEASON_TYPE"]]][0:(10 - len(PlayoffGameLog))])
+        print(10 - len(PlayoffGameLog))
+        df = pandas.concat([PlayoffGameLog[[stat_type, "MATCHUP", "GAME_DATE", "SEASON_TYPE"]], RegularSeasonGameLog[[stat_type, "MATCHUP", "GAME_DATE", "SEASON_TYPE"]]])
     else:
-        df = PlayoffGameLog[stat_type, "MATCHUP", "GAME_DATE", "SEASON_TYPE"]
+        df = PlayoffGameLog[[stat_type, "MATCHUP", "GAME_DATE", "SEASON_TYPE"]]
     returnable = []
 
     df = df.sort_values(by="GAME_DATE", ascending=False)
-    
+
     for index, row in df.iterrows():
         returnable.append({
             "isHome": "false" if "@" in row.iloc[1] else "true",
@@ -126,6 +127,7 @@ def get_last_ten():
             "season_type": row.iloc[3]
         })
     return returnable
+    
     # stat_type = "PTS"
     # pgl = PlayerGameLog(player_id=203999, season="2023-24", season_type_all_star="Playoffs").get_data_frames()[0][0:10]
     # df = pgl[[stat_type, "MATCHUP", "GAME_DATE"]]
